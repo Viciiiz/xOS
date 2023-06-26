@@ -1,4 +1,4 @@
-file hello
+file main
 target remote localhost:1234
 layout src
 b main
