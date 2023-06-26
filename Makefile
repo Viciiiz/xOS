@@ -1,14 +1,15 @@
 
 
 
-all: hello rootfs.img
-	mcopy -i rootfs.img@@1M hello ::/
+all: main rootfs.img
+	mcopy -i rootfs.img@@1M main ::/
 	mmd -i rootfs.img@@1M boot 
 	mcopy -i rootfs.img@@1M grub.cfg ::/boot
 
-hello: hello.c
-	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall hello.c
-	ld --section-start=.text=100000 --section-start=.rodata=0  -e main -melf_i386  hello.o -o hello
+main: src/main.c
+	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/main.c
+	mv *.o obj/
+	ld --section-start=.text=100000 --section-start=.rodata=0  -e main -melf_i386  obj/main.o -o main
 
 
 rootfs.img:
@@ -26,4 +27,4 @@ debug:
 	TERM=xterm gdb -x gdb_os.txt && killall qemu-system-i386
 
 clean:
-	rm -f grub.img hello hello.o rootfs.img
+	rm -f grub.img main rootfs.img
