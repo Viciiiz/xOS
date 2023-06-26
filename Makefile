@@ -8,8 +8,9 @@ all: main rootfs.img
 
 main: src/main.c
 	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/main.c
+	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/rprintf.c
 	mv *.o obj/
-	ld --section-start=.text=100000 --section-start=.rodata=0  -e main -melf_i386  obj/main.o -o main
+	ld --section-start=.text=100000 --section-start=.rodata=0  -e main -melf_i386  obj/main.o obj/rprintf.o -o main
 
 
 rootfs.img:
