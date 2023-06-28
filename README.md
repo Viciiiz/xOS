@@ -56,3 +56,13 @@ make debug
 
 Use gdb commands to step through the code (n for next line, c for continue, si to step into a function, b to branch, p to print, etc.) The qemu is used to simulate an x86-based computer system for running the operating system contained in the "rootfs.img" disk image.
 
+
+## components
+
+- rprintf.c
+
+Contains useful functions from stdio.h such as rprintf (the equivalent of printf()). The code is from https://neilklingensmith.com/teaching/loyola/cs310-s2023/homework/rprintf.c
+
+- putc.c
+
+Contains a function putc(char c) that is going to be passed to rprintf. The qemu terminal has 24 rows and 88 columns; putc.c contains functions that handle the scrolling effect on the qemu (the scrolling effect involves each line overwriting the previous line and freeing the last line of the screen). Putc() basically takes a character and writes it to the video memory (address 0xb8000); more specifically, it writes 16 bits per character to the video memory--the first 8 bits being the background color, and the remaining 8 bits the actual char data.
