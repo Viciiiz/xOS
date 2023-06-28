@@ -1,5 +1,6 @@
 
 #include <stdint.h>
+#include "headers/main.h"
 
 #define MULTIBOOT2_HEADER_MAGIC         0xe85250d6
 
@@ -14,6 +15,8 @@ uint8_t inb (uint16_t _port) {
 void main() {
     unsigned short *vram = (unsigned short*)0xb8000; // Base address of video mem
     const unsigned char color = 7; // gray text on black background
+
+    esp_printf(putc, "hello world");
 
     while(1) {
         uint8_t status = inb(0x64);
