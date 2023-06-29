@@ -66,3 +66,7 @@ Contains useful functions from stdio.h such as rprintf (the equivalent of printf
 - putc.c
 
 Contains a function putc(char c) that is going to be passed to rprintf. The qemu terminal has 24 rows and 88 columns; putc.c contains functions that handle the scrolling effect on the qemu (the scrolling effect involves each line overwriting the previous line and freeing the last line of the screen). Putc() basically takes a character and writes it to the video memory (address 0xb8000); more specifically, it writes 16 bits per character to the video memory--the first 8 bits being the background color, and the remaining 8 bits the actual char data.
+
+- io_ports.c
+
+Contains 2 functions: inb() and outb(). inb(p) reads from I/O port p, and returns a one byte value. outb(p, val) writes a byte val to a specified I/O port p. The infinite loop in main() reads from port 0x64 to check if the keyboard has been pressed (that is, if there is any scancode to read). If it's the case, it then reads the scancode from port 0x60 and converts it to ascii using the keyboard_map[] in main.h. Used in this way, inb allows the implementation of a keyboard driver that reads keyboard input and displays it to the qemu. 
