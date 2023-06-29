@@ -1,9 +1,25 @@
+#include <stdint.h>
 #include "rprintf.h"
 #include "putc.h"
 #include "io_ports.h"
 
+/*
+ * Magic number for multiboot header
+ *
+ */
 #define MULTIBOOT2_HEADER_MAGIC         0xe85250d6
 
+/*
+ * multiboot header
+ *
+ */
+const unsigned int multiboot_header[]  = {MULTIBOOT2_HEADER_MAGIC, 0, 16, -(16+MULTIBOOT2_HEADER_MAGIC), 0, 12};
+
+
+/*
+ * keyboard map to convert the scancode read from port 0x60 to ascii
+ *
+ */
 unsigned char keyboard_map[128] =
 {
    0,  27, '1', '2', '3', '4', '5', '6', '7', '8',     /* 9 */

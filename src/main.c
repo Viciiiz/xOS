@@ -1,19 +1,18 @@
 
-#include <stdint.h>
 #include "headers/main.h"
 
 
-/*
- * multiboot header
- *
- */
-const unsigned int multiboot_header[]  = {MULTIBOOT2_HEADER_MAGIC, 0, 16, -(16+MULTIBOOT2_HEADER_MAGIC), 0, 12};
+uint8_t p_init_txt(){
+    esp_printf(putc, "Hello, World!\n\n\n\t\t\t\t\t\t\t Welcome to my OS!\n\n\n\n");
+    return 0;
+}
 
 
 
 
 void main() {
 
+    p_init_txt();
 
     while(1) {
 	// read from port 0x64 (status register)
@@ -26,7 +25,7 @@ void main() {
 
 	   // conversion to ascii & print to qemu
            if(keyboard_map[scancode] >= 1 && keyboard_map[scancode]!=0){
-	   	if((scancode & 0x80) == 0){ 
+	   	if((scancode & 0x80) == 0){
 	   	   esp_printf(putc, "%c", keyboard_map[scancode]);
 		}
 	   }

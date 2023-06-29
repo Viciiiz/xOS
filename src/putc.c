@@ -15,6 +15,7 @@ void putc(int data)
 			break;
 		case '\n': //new line
 			y += 1;
+			x = 0;
 			break;
 		case 0x08: //backspace
 			if(x != 0)
