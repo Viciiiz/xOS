@@ -1,6 +1,8 @@
 #include "rprintf.h"
 #include "putc.h"
+#include "io_ports.h"
 
+#define MULTIBOOT2_HEADER_MAGIC         0xe85250d6
 
 unsigned char keyboard_map[128] =
 {
