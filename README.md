@@ -45,6 +45,12 @@ If you are using a Mac with a M1 chip, you will need to use the Makefile.m1 file
 make clean && make -f Makefiles/Makefile.m1
 ```
 
+## Linker Script
+
+kernel.ld defines the memory layout for a kernel image in the ELF format. It specifies the placement of sections such as code, data, stack, and the Multiboot structure, as well as defines symbols for the start and end addresses of sections for later reference. 
+
+Specifying the layout is useful in our case for implementing the page frame allocator. The _end_kernel symbol defined in the script will serve as a reference point to start mapping physical addresses for paging from the end of the kernel. Also, the multiboot header is now going to live at the .multiboot section.
+
 ## debug
 
 The "debug" target in the Makefile starts a detached screen session and launches the qemu-system-i386 emulator in debugging mode with the specified disk image (rootfs.img). It then initiates a gdb session using configurations from gdb_os.txt and terminates the emulator after the debugging session ends. 
@@ -70,3 +76,4 @@ Contains a function putc(char c) that is going to be passed to rprintf. The qemu
 - io_ports.c
 
 Contains 2 functions: inb() and outb(). inb(p) reads from I/O port p, and returns a one byte value. outb(p, val) writes a byte val to a specified I/O port p. The infinite loop in main() reads from port 0x64 to check if the keyboard has been pressed (that is, if there is any scancode to read). If it's the case, it then reads the scancode from port 0x60 and converts it to ascii using the keyboard_map[] in main.h. Used in this way, inb allows the implementation of a keyboard driver that reads keyboard input and displays it to the qemu. 
+
