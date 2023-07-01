@@ -11,8 +11,9 @@ main: src/main.c
 	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/rprintf.c
 	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/putc.c
 	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/io_ports.c
+	gcc -c -ffreestanding -mgeneral-regs-only -mno-mmx -m32 -march=i386 -fno-pie -fno-stack-protector -g3 -Wall src/page.c
 	mv *.o obj/
-	ld -T kernel.ld  -e main -melf_i386  obj/main.o obj/rprintf.o obj/putc.o obj/io_ports.o -o main
+	ld -T kernel.ld  -e main -melf_i386  obj/main.o obj/rprintf.o obj/putc.o obj/io_ports.o obj/page.o -o main
 
 
 rootfs.img:
