@@ -14,6 +14,8 @@ void main() {
 
     p_init_txt();
 
+    init_pfa_list();
+
     while(1) {
 	// read from port 0x64 (status register)
         uint8_t status = inb(0x64);

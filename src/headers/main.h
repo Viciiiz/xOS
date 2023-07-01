@@ -2,6 +2,7 @@
 #include "rprintf.h"
 #include "putc.h"
 #include "io_ports.h"
+#include "page.h"
 
 /*
  * Magic number for multiboot header
