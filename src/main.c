@@ -16,6 +16,8 @@ void main() {
 
     init_pfa_list();
 
+    struct ppage *page = allocate_physical_pages(2);
+
     while(1) {
 	// read from port 0x64 (status register)
         uint8_t status = inb(0x64);

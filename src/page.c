@@ -39,7 +39,20 @@ void init_pfa_list(void) {
  * function to allocate npages pages from the free physical pages
  */
 struct ppage *allocate_physical_pages(unsigned int npages) {
+   struct ppage *allocated_list = free_physical_pages;
+   struct ppage *temp = allocated_list;
+   for(int i = 1; i < npages; i++) {
+	temp = temp->next;
+   }
+   //temp->prev->next = NULL;
+   //temp->prev = NULL;
+   //free_physical_pages = temp;
 
+   free_physical_pages = temp->next;
+   free_physical_pages->prev = NULL;
+   temp->next = NULL;
+   
+   return allocated_list;
 }
 
 
