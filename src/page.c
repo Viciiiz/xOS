@@ -61,5 +61,11 @@ struct ppage *allocate_physical_pages(unsigned int npages) {
  * The freed pages will be linked back to the free physical pages array
  */
 void free_pages(struct ppage *ppage_list){
-
+   struct ppage *temp = ppage_list;
+   while(temp->next != NULL) {
+	   temp = temp->next;
+   }
+   temp->next = free_physical_pages;
+   free_physical_pages->prev = temp;
+   free_physical_pages = ppage_list;
 }

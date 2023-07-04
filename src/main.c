@@ -16,7 +16,11 @@ void main() {
 
     init_pfa_list();
 
+    // allocate 2 pages
     struct ppage *page = allocate_physical_pages(2);
+
+    // free the 2 allocated pages page
+    free_pages(page);
 
     while(1) {
 	// read from port 0x64 (status register)
