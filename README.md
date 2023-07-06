@@ -77,3 +77,6 @@ Contains a function putc(char c) that is going to be passed to rprintf. The qemu
 
 Contains 2 functions: inb() and outb(). inb(p) reads from I/O port p, and returns a one byte value. outb(p, val) writes a byte val to a specified I/O port p. The infinite loop in main() reads from port 0x64 to check if the keyboard has been pressed (that is, if there is any scancode to read). If it's the case, it then reads the scancode from port 0x60 and converts it to ascii using the keyboard_map[] in main.h. Used in this way, inb allows the implementation of a keyboard driver that reads keyboard input and displays it to the qemu. 
 
+- page.c
+
+Implements a page frame allocator managing the allocation and deallocation of physical memory pages. It initializes a linked list structure to store available pages, aligning them to a 4kb boundary starting from the "_end_kernel" address defined in the "kernel.ld" linker script. The "allocate_physical_pages()" function reserves pages from the list based on specified requirements, while the "free_pages()" function returns previously allocated pages. This allocator plays a vital role in efficient memory management within the operating system, ensuring proper alignment and utilization of physical memory.
