@@ -13,7 +13,7 @@ struct page_directory_entry
 };
 
 
-struct page
+struct page_table_entry
 {
    uint32_t present    : 1;   // Page present in memory
    uint32_t rw         : 1;   // Read-only if clear, readwrite if set
